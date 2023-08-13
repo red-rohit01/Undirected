@@ -33,13 +33,20 @@ const CreateProduct = () => {
   }, [dispatch, error, success]);
 
   const handleImageChange = (e) => {
-    e.preventDefault();
-
-    let files = Array.from(e.target.files);
-    setImages((prevImages) => [...prevImages, ...files]);
+    //e.preventDefault();
+    const files = Array.from(e.target.files);
+    setImages([]);
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {                              //If the readyState is 2, it means the data has been loaded successfully, and reader.result contains the loaded data in the form of a data URL. A data URL is a way to represent binary data, such as an image, as a string.
+          setImages((old) => [...old, reader.result]);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
   };
 
-  console.log(images);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,7 +64,21 @@ const CreateProduct = () => {
     newForm.append("discountPrice", discountPrice);
     newForm.append("stock", stock);
     newForm.append("shopId", seller._id);
-    dispatch(createProduct(newForm));
+    //dispatch(createProduct(newForm));
+
+    dispatch(
+      createProduct({
+        name,
+        description,
+        category,
+        tags,
+        originalPrice,
+        discountPrice,
+        stock,
+        shopId: seller._id,
+        images,
+      })
+    );
   };
 
   return (
@@ -174,7 +195,7 @@ const CreateProduct = () => {
           </label>
           <input
             type="file"
-            name=""
+            name="images"
             id="upload"
             className="hidden"
             multiple
@@ -187,7 +208,7 @@ const CreateProduct = () => {
             {images &&
               images.map((i) => (
                 <img
-                  src={URL.createObjectURL(i)}
+                  src={i}
                   key={i}
                   alt=""
                   className="h-[120px] w-[120px] object-cover m-2"

@@ -29,7 +29,14 @@ const productSchema = new mongoose.Schema({
   },
   images: [
     {
-      type: String,
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
     },
   ],
   reviews: [
@@ -65,7 +72,7 @@ const productSchema = new mongoose.Schema({
   },
   sold_out: {
     type: Number,
-    default: 0,
+    default: 1,
   },
   createdAt: {
     type: Date,
