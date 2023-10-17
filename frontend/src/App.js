@@ -70,11 +70,11 @@ const App = () => {
     Store.dispatch(getAllEvents());
     getStripeApikey();
   }, []);
-
+                                          
   return (
     <BrowserRouter>
       {stripeApikey && (
-        <Elements stripe={loadStripe(stripeApikey)}>
+        <Elements stripe={loadStripe(stripeApikey)}>           
           <Routes>
             <Route
               path="/payment"
@@ -140,6 +140,7 @@ const App = () => {
           }
         />
         <Route path="/shop/preview/:id" element={<ShopPreviewPage />} />
+        
         {/* shop Routes */}
         <Route path="/shop-create" element={<ShopCreatePage />} />
         <Route path="/shop-login" element={<ShopLoginPage />} />
