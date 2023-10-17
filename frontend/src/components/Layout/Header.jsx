@@ -99,8 +99,8 @@ const Header = ({ activeHeading }) => {
 
           <div className={`${styles.button}`}>
             <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
-              <h1 className="text-[#fff] flex items-center">
-                {isSeller ? "Go Dashboard" : "Become Seller"}{" "}
+              <h1 className="text-[#fff] flex items-center">                                           
+                {isSeller ? "Go Dashboard" : "Become Seller"}{" "}  {/* This curly brace only used to give a space before the arrow  */}    
                 <IoIosArrowForward className="ml-1" />
               </h1>
             </Link>

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,jsx}"],
+  content: ["./src/**/*.{html,js,jsx}"],                     //It means it will support {html,js and jsx} kind of file.
   mode: "jit",
   theme: {
     fontFamily: {
